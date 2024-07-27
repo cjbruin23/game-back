@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 
-const express = require("express");
-const dotenv = require("dotenv");
+import express from "express";
+import dotenv from "dotenv";
+import bodyParser from 'body-parser';
+import getPlayerRoutes from './routes/player';
+
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const playerRoutes = require('./routes/player');
+
 
 // configures dotenv to work in your application
 dotenv.config();
@@ -23,7 +25,7 @@ app.get("/", (request: Request, response: Response) => {
 }); 
 
 
-const playerRouter = playerRoutes.getPlayerRoutes();
+const playerRouter = getPlayerRoutes();
 
 app.use(playerRouter);
 
