@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 
 const express = require("express");
 const dotenv = require("dotenv");
-const cors = require('cors')
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 // configures dotenv to work in your application
 dotenv.config();
 const app = express();
+const router = express.Router();
 
 //CORS
 const corsOptions = {
@@ -14,16 +16,21 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+//
+app.use(bodyParser.json())
+
 
 // ROUTES
 app.get("/", (request: Request, response: Response) => { 
   response.status(200).send("Hello World");
 }); 
 
-app.post('/player', (request: Request, response: Response) => {
-  console.log('request', request)
+router.post('/player', (request: Request, response: Response) => {
+  console.log('request', request.body)
   response.status(200).send("Hello World");
 });
+
+app.use(router)
 
 
 // SERVER START
