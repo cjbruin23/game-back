@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const player_1 = require("../controllers/player");
+const player_1 = require("../repository/player");
 const express = require("express");
 var UserActions;
 (function (UserActions) {
@@ -15,10 +15,10 @@ const getPlayerRoutes = () => {
         const userInformation = reqBody.userInformation;
         const action = reqBody.action;
         if (action === UserActions.LOGIN) {
-            (0, player_1.loginPlayer)();
+            (0, player_1.loginPlayer)(userInformation);
         }
         else if (action === UserActions.SIGNUP) {
-            (0, player_1.signUpPlayer)();
+            (0, player_1.signUpPlayer)(userInformation);
         }
         response.status(200).send("Hello World");
     });

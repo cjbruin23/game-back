@@ -7,7 +7,6 @@ import getPlayerRoutes from './routes/player';
 
 const cors = require('cors');
 
-
 // configures dotenv to work in your application
 dotenv.config();
 const app = express();

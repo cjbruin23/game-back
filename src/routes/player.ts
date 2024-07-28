@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { signUpPlayer, loginPlayer} from '../controllers/player'
-import { UserInformation } from "../types/types";
+import { signUpPlayer, loginPlayer} from '../repository/player'
+import { PlayerInformation } from "../types/Player";
 
 const express = require("express");
 
@@ -17,7 +17,7 @@ const getPlayerRoutes = () => {
 
         const reqBody = request.body;
 
-        const userInformation = reqBody.userInformation as UserInformation;
+        const userInformation = reqBody.userInformation as PlayerInformation;
         const action = reqBody.action;
 
         if (action === UserActions.LOGIN) {
