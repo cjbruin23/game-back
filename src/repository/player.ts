@@ -7,6 +7,11 @@ export const loginPlayer = async (userInformation: PlayerInformation) => {
     console.log('login player')
 }
 
-export const signUpPlayer = (userInformation: PlayerInformation) => {
+export const signUpPlayer = async (userInformation: PlayerInformation) => {
+    const result = await db.insertInto('player').values({
+        username: userInformation.username,
+        password: userInformation.password
+    }).executeTakeFirst();
+    console.log('result', result)
     console.log('signUpPlayer')
 }

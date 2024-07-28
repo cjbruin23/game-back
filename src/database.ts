@@ -4,7 +4,6 @@ import { Pool } from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
-console.log(`${process.env.DB_CONNECTION_STRING}`)
 
 const dialect = new PostgresDialect({
     pool: new Pool({

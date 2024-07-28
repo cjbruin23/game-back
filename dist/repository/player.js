@@ -17,7 +17,12 @@ const loginPlayer = (userInformation) => __awaiter(void 0, void 0, void 0, funct
     console.log('login player');
 });
 exports.loginPlayer = loginPlayer;
-const signUpPlayer = (userInformation) => {
+const signUpPlayer = (userInformation) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield database_1.db.insertInto('player').values({
+        username: userInformation.username,
+        password: userInformation.password
+    }).executeTakeFirst();
+    console.log('result', result);
     console.log('signUpPlayer');
-};
+});
 exports.signUpPlayer = signUpPlayer;

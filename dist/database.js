@@ -8,7 +8,6 @@ const kysely_1 = require("kysely");
 const pg_1 = require("pg");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-console.log(`${process.env.DB_CONNECTION_STRING}`);
 const dialect = new kysely_1.PostgresDialect({
     pool: new pg_1.Pool({
         connectionString: `${process.env.DB_CONNECTION_STRING}`,
