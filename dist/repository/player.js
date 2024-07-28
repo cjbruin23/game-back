@@ -11,18 +11,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.signUpPlayer = exports.loginPlayer = void 0;
 const database_1 = require("../database");
+const getUserByUsername = (username) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield database_1.db.selectFrom('player').where('username', '=', username).selectAll().executeTakeFirst();
+    return result;
+});
 const loginPlayer = (userInformation) => __awaiter(void 0, void 0, void 0, function* () {
-    const player = yield database_1.db.selectFrom('player').where('id', '=', 1).selectAll().executeTakeFirst();
+    const player = yield database_1.db.selectFrom('player').where('username', '=', userInformation.username).selectAll().executeTakeFirst();
     console.log('player', player);
     console.log('login player');
+    return 200;
 });
 exports.loginPlayer = loginPlayer;
 const signUpPlayer = (userInformation) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield database_1.db.insertInto('player').values({
-        username: userInformation.username,
-        password: userInformation.password
-    }).executeTakeFirst();
-    console.log('result', result);
-    console.log('signUpPlayer');
+    const username = yield getUserByUsername(userInformation.username);
+    console.log('usernameExists', username);
+    if (!username) {
+        const result = yield database_1.db.insertInto('player').values({
+            username: userInformation.username,
+            password: userInformation.password,
+            email: userInformation.email
+        }).executeTakeFirst();
+        return 201;
+    }
+    else {
+        return 409;
+    }
 });
 exports.signUpPlayer = signUpPlayer;

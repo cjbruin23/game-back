@@ -6,6 +6,7 @@ export interface Database {
 
 export interface PlayerTable {
     id: Generated<number>
+    email: string
     username: string
     password: string
 }
